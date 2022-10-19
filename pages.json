@@ -1,0 +1,120 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "主页",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/person/person",
+			"style": {
+				"navigationBarTitleText": "个人",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/info/info",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/docker-list/docker-list",
+			"style": {
+				"navigationBarTitleText": "挂号",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/docker-detail/docker-detail",
+			"style": {
+				"navigationBarTitleText": "医生详情",
+				"enablePullDownRefresh": false
+			}
+
+		}
+
+	    ,{
+            "path" : "pages/unpateinfo/unpateinfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shop/shop",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "药房",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/goods-detail/goods-detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "药品详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "智慧医疗系统",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"list": [{
+				"iconPath": "static/icon/home.png",
+				"pagePath": "pages/index/index",
+				"selectedIconPath": "static/icon/home-active.png",
+				"text": "首页"
+			},
+			{
+				"iconPath": "static/icon/news.png",
+				"pagePath": "pages/docker-list/docker-list",
+				"selectedIconPath": "static/icon/news-active.png",
+				"text": "消息"
+			},
+			{
+				"iconPath": "static/icon/cart.png",
+				"pagePath": "pages/cart/cart",
+				"selectedIconPath": "static/icon/cart-active.png",
+				"text": "购物车"
+			},
+			{
+				"iconPath": "static/icon/member.png",
+				"pagePath": "pages/person/person",
+				"selectedIconPath": "static/icon/member-active.png",
+				"text": "我的"
+			}
+
+		]
+	}
+}
