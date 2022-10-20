@@ -92,7 +92,12 @@
 					})
 				} else if (name == 3) {
 					uni.navigateTo({
-						url: "/pages/shop/shop"
+						url: "/pages/cart/cart"
+					})
+				}
+				else if (name == 4) {
+					uni.navigateTo({
+						url: "/pages/order/order"
 					})
 				}
 			}

@@ -1,5 +1,8 @@
 <template>
-	<view class="info" :style="'height:'+screenHeight+'px;'">
+	<view class="info" style="background-color: rgb(222,225,230);">
+		<view
+			:style="'height:'+screenHeight+'px;background-color: rgb(222,225,230);width:100%;position: absolute;top:0;left:0;z-index:-1;'">
+		</view>
 		<u-loading-page :loading="load"></u-loading-page>
 		<tabs :tabBars="tabBars" :tabIndex="tabIndex" @tabtap="tabtap"></tabs>
 		<view class="content" v-if=" contData.length !=0">
@@ -14,7 +17,7 @@
 				</view>
 			</view>
 		</view>
-		<view  v-else>
+		<view v-else>
 			<u-empty mode="message" icon="http://cdn.uviewui.com/uview/empty/message.png">
 			</u-empty>
 		</view>
@@ -26,7 +29,7 @@
 	export default {
 		data() {
 			return {
-				load:true,
+				load: true,
 				tabIndex: 0,
 				tabBars: [{
 						name: "就医提醒",
@@ -47,14 +50,14 @@
 		},
 		methods: {
 			tabtap(index) {
-				this.load=true
-				
+				this.load = true
+
 				console.log(index)
 				this.tabIndex = index;
 				this.getInfo()
 			},
 			getInfo() {
-				
+
 				//发送请求 获取数据
 
 				if (this.tabIndex == 1) {
@@ -72,20 +75,15 @@
 							"title": this.tabIndex,
 							"content": `实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死`,
 							"date": "2022-01-02"
-						},
-						{
-							"title": this.tabIndex,
-							"content": `实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死实打实的你说的那是你打死`,
-							"date": "2022-01-02"
 						}
 					]
 				} else {
 					this.contData = []
 				}
-				setTimeout(()=>{
-					this.load=false
-				},2000)
-				
+				setTimeout(() => {
+					this.load = false
+				}, 2000)
+
 			},
 
 			open(name) {
@@ -98,7 +96,7 @@
 		onLoad() {
 			this.screenHeight = this.$store.state.globalHeight
 			this.getInfo()
-			
+
 		},
 		components: {
 			tabs

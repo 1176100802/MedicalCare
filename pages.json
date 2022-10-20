@@ -81,6 +81,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/paypage/paypage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -104,9 +122,9 @@
 			},
 			{
 				"iconPath": "static/icon/cart.png",
-				"pagePath": "pages/cart/cart",
+				"pagePath": "pages/shop/shop",
 				"selectedIconPath": "static/icon/cart-active.png",
-				"text": "购物车"
+				"text": "药房"
 			},
 			{
 				"iconPath": "static/icon/member.png",

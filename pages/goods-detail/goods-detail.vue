@@ -27,6 +27,14 @@
 					@buttonClick="buttonClick" />
 			</view>
 		</view>
+		<u-popup :show="show" mode="bottom" @close="close" @open="open" >
+			<view style="height: 100rpx;margin: 0 auto;padding-top: 50rpx;">
+				<u-number-box v-model="value" @change="valChange" ></u-number-box>
+			</view>
+			<view style="width: 50%;margin: 0 auto;margin-bottom: 10rpx;">
+				<u-button text="购买" type="primary" shape="circle" @click="send"></u-button>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -34,8 +42,10 @@
 	export default {
 		data() {
 			return {
+				show: false,
 				id: 0,
 				currentNum: 0,
+				value: 0,
 				list6: [
 					'https://cdn.uviewui.com/uview/swiper/swiper2.png',
 					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
@@ -85,8 +95,28 @@
 			},
 			buttonClick(e) {
 				console.log(e)
-				this.options[2].info++
+				if (e.index == 1) {
+					this.show = true
+				}
+			},
+			open() {
+				// console.log('open');
+			},
+			close() {
+				this.show = false
+				// console.log('close');
+			},
+
+			valChange(e) {
+				console.log('当前值为: ' + e.value)
+			},
+			send(){
+				uni.redirectTo({
+					url:"/pages/paypage/paypage"
+				})
 			}
+
+
 		},
 		onLoad(options) {
 			this.id = options.id
