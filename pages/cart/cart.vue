@@ -34,11 +34,11 @@
 				<u-checkbox activeColor="blue" shape="circle" :checked="all" label="全选">
 				</u-checkbox>
 			</view>
-			<view style="margin-left: 20%;">
+			<view style="margin-left: 10%;">
 				<text>合计：￥{{sum}}</text>
 			</view>
 			<view style="margin-left: 5%;width: 20%;">
-				<u-button text="月落" type="error" shape="circle" @click="click"></u-button>
+				<u-button text="支付" type="error" shape="circle" @click="click"></u-button>
 			</view>
 		</view>
 
@@ -126,7 +126,7 @@
 		position: fixed;
 		bottom: 0;
 		width: 100%;
-		background-color: red;
+		background-color: #eee;
 		height: 100rpx;
 		display: flex;
 		align-items: center;
