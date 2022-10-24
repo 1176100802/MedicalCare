@@ -111,10 +111,10 @@
 <style lang="scss">
 	.cart {
 		width: 100%;
-		
-		
-		
-		
+
+
+
+
 	}
 
 	img {
@@ -130,6 +130,6 @@
 		height: 100rpx;
 		display: flex;
 		align-items: center;
-
+  z-index: 999;
 	}
 </style>
