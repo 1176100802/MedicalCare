@@ -45,7 +45,7 @@
 					success: (res) => {
 						console.log("用户信息" + JSON.stringify(res.userInfo));
 						let userInfo = res.userInfo
-
+						
 						uni.login({
 							provider: 'weixin',
 							success: (res2) => {
