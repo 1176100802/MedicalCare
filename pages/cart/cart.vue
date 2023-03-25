@@ -1,5 +1,5 @@
 <template>
-	<view :style="'height:'+screenHeight+'px;background-color:#eee;'">
+	<view :style="'height:'+(screenHeight+200)+'px;background-color:#eee;'">
 		<view class="cart" >
 			<view v-for="(item,index) in test"
 				style="height: 200rpx;width: 100%;display: flex;align-items: center;border-bottom: 7px solid #eee;border-top: 7px solid #eee;background-color: white;">

@@ -55,7 +55,7 @@
 	export default {
 		data() {
 			return {
-				title: "xx科",
+				title: "外科",
 				stateDrawer: false,
 				startTime: null, // 手势滑动时间
 				startPosition: 0, // 手势进入时

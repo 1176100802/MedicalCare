@@ -4,8 +4,8 @@
 			<img src="https://img1.baidu.com/it/u=1680296034,3230243816&fm=253&fmt=auto&app=120&f=PNG?w=640&h=361"
 				:style="'filter:opacity('+opacity+'%);height:100%;width:100%;'" alt="">
 		</view>
-
-		<view class="searchBar" :style="'top:'+top+'rpx;background-color:rgba(255,255,255,'+color+');'">
+<!-- <view class="searchBar" :style="'top:'+Math.min(top,20)+'rpx;background-color:rgba(255,255,255,'+color+');'"> -->
+		<view class="searchBar" :style="'top:'+Math.min(top,20)+'rpx'">
 			<view class="searchInput" :style="'width:'+width+'%'">
 				<u-search bgColor="#ffffff" inputAlign="center" height="45px" shape="round" :showAction="false"
 					borderColor="rgb(255,255,0)">

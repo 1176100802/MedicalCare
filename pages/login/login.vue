@@ -5,9 +5,9 @@
 			<text style="text-align: center;line-height: 100rpx;">智慧医疗</text>
 		</view>
 		<view class="center">
-			<view>
-				<text>请登录，请登录，请登录，请登录</text>
-			</view>
+		<!-- 	<view>
+				<text>请登录</text>
+			</view> -->
 			<view style="margin-top: 20rpx;font-size: 15px;margin-bottom: 20rpx;">
 				授权绑定为你提供更好服务
 			</view>
