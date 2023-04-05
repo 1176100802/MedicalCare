@@ -25,6 +25,8 @@ export function createApp() {
 import {myRequest} from './util/api.js'
 Vue.prototype.$myRequest=myRequest
 
+import {myToast} from './util/toast.js'
+Vue.prototype.$myToast=myToast
 
 // main.js
 import uView from '@/uni_modules/uview-ui'

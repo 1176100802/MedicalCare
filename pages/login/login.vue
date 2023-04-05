@@ -30,7 +30,8 @@
 		data() {
 			return {
 				src: "https://www.uviewui.com/common/logo.png",
-				screenHeight: 0
+				screenHeight: 0,
+				userInfos:null
 			}
 		},
 		computed: {
@@ -39,42 +40,55 @@
 
 		methods: {
 			...mapActions(['login', 'logout']),
+			
+			
+			
 			weixinLogin() {
+				
 				uni.getUserProfile({
 					desc: '注册',
 					success: (res) => {
-						console.log("用户信息" + JSON.stringify(res.userInfo));
-						let userInfo = res.userInfo
-						
 						uni.login({
 							provider: 'weixin',
 							success: (res2) => {
 								uni.showLoading({
-									title: '登陆中'
+									title: '登陆中',
+									icon:'loading'
 								})
-								var code = res2.code
-								this.wxLogin(code)
+								
+							
+								this.wxLogin(res2.code,res.userInfo.nickName)
 
 							}
 						})
 					}
 				})
 			},
-			async wxLogin(code) {
+			async wxLogin(code,nickName) {
 				const res = await this.$myRequest({
-					url: '/wxlogin',
+					url: '/getCode',
 					method: 'POST',
 					data: {
-						code: code
+						code:code
 					}
 				})
-
-
-				//、保存至Vuex
-				//this.login(res.data)
-
-
+				uni.hideLoading();
+				if(res.data.status==200){
+					
+					//、保存至Vuex
+					this.login(JSON.parse(res.data.data))
+					this.goToIndex();
+				}
+				
+				else{
+					this.$myToast({
+						title:'登录失败',
+						icon:'error'
+					})
+				}
+			
 			},
+			
 			goToIndex() {
 				uni.switchTab({
 					url: '/pages/index/index'
@@ -84,8 +98,12 @@
 				});
 			},
 			sureCache() {
-				if (JSON.stringify(this.userInfo) == "{}") {
-					console.log("logout")
+				this.userInfos=this.$store.state.userInfo
+				if (JSON.stringify(this.userInfos) == "{}") {
+					this.$myToast({
+						title:'请登录',
+						icon:'none'
+					})
 				} else {
 					console.log("login")
 					this.goToIndex()

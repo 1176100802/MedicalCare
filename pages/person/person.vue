@@ -40,6 +40,7 @@
 		data() {
 			return {
 				screenHeight: 0,
+				userInfo:null,
 				list: [{
 						name: 'photo',
 						title: '图片'
@@ -103,6 +104,7 @@
 			}
 		},
 		onLoad() {
+			this.userInfo=this.$store.state.userInfo
 			this.screenHeight = this.$store.state.globalHeight
 		},
 	}
