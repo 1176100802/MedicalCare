@@ -18,6 +18,7 @@
 			</view>
 
 		</view>
+		
 	</view>
 </template>
 
@@ -40,9 +41,7 @@
 
 		methods: {
 			...mapActions(['login', 'logout']),
-			
-			
-			
+		
 			weixinLogin() {
 				
 				uni.getUserProfile({
@@ -53,7 +52,8 @@
 							success: (res2) => {
 								uni.showLoading({
 									title: '登陆中',
-									icon:'loading'
+									icon:'loading',
+									
 								})
 								
 							
@@ -67,45 +67,56 @@
 			async wxLogin(code,nickName) {
 				const res = await this.$myRequest({
 					url: '/getCode',
-					method: 'POST',
+					method: 'GET',
 					data: {
-						code:code
+						code:code,
+						username:nickName
 					}
 				})
-				uni.hideLoading();
-				if(res.data.status==200){
+				setTimeout(()=>{
+					uni.hideLoading();
+					console.log(res)
+					if(res.data.code==200){
+						
+						//、保存至Vuex
+						this.login(res.data.data)
+						this.goToIndex();
+						
+					}
 					
-					//、保存至Vuex
-					this.login(JSON.parse(res.data.data))
-					this.goToIndex();
-				}
+					else{
+						this.$myToast({
+							title:'登录失败',
+							icon:'error'
+						})
+					}
+				},1000);
 				
-				else{
-					this.$myToast({
-						title:'登录失败',
-						icon:'error'
-					})
-				}
 			
 			},
 			
 			goToIndex() {
+				var that = this
 				uni.switchTab({
-					url: '/pages/index/index'
-					// complete(res) {
-					// console.log(res)	
-					// }
+					url: '/pages/index/index',
+					complete(res) {
+						that.$myToast({
+							title:'登录成功',
+							icon:'success'
+						})
+					}
 				});
+				
 			},
 			sureCache() {
 				this.userInfos=this.$store.state.userInfo
 				if (JSON.stringify(this.userInfos) == "{}") {
 					this.$myToast({
-						title:'请登录',
+						title:'请使用微信登录',
 						icon:'none'
 					})
 				} else {
-					console.log("login")
+					console.log(this.userInfos)
 					this.goToIndex()
 				}
 

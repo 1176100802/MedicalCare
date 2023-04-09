@@ -18,8 +18,8 @@
 							<u-grid>
 								<u-grid-item v-for="(item, index) in swiperList" :index="index" :key="index"
 									@click="click">
-									<u-icon :customStyle="{paddingTop:40+'rpx'}" :name="item" :size="30"></u-icon>
-									<text class="grid-text">{{ '宫格' + (index + 1) }}</text>
+									<u-icon :customStyle="{paddingTop:40+'rpx'}" :name="item.icon" :size="30"></u-icon>
+									<text class="grid-text">{{ item.title }}</text>
 								</u-grid-item>
 							</u-grid>
 						</swiper-item>
@@ -32,7 +32,7 @@
 
 
 		<u-swiper :list="list3" indicator indicatorMode="line" circular></u-swiper>
-	
+
 	</view>
 </template>
 
@@ -41,16 +41,51 @@
 		data() {
 			return {
 				list3: [
-					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper1.png',
+					'/static/pic1.jpg',
+					'/static/pic2.jpeg'
 				],
-				swiperList: ['integral', 'kefu-ermai', 'coupon', 'gift', 'scan', 'pause-circle', 'wifi', 'email', 'list'],
-				text5: '涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川'
+				swiperList: [{
+						'icon': 'integral',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'kefu-ermai',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'coupon',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'gift',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'scan',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'pause-circle',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'wifi',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'email',
+						'title': '医护查询'
+					},
+					{
+						'icon': 'list',
+						'title': '医护查询'
+					}
+				],
+				text5: '欢迎进入智慧医疗系统!!!'
 			}
 		},
 		methods: {
-			
+
 			async getSwipers() {
 				// const res=await this.$myRequest({
 				// 	url:'/getSwiper',
@@ -59,7 +94,12 @@
 				// this.swipers=res.data
 			},
 			click(name) {
-				this.$refs.uToast.success(`点击了第${name}个`)
+				if(name==0){
+					console.log("1")
+					uni.navigateTo({
+						url:'/pages/cart/cart'
+					})
+				}
 			}
 		},
 		onLoad() {
@@ -73,7 +113,7 @@
 			// 	content: "是否授权",
 			// 	success: (res) => {
 			// 		if (res.confirm) {
-						
+
 			// 		}
 			// 	}
 			// })

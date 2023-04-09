@@ -9,7 +9,7 @@
 				<text>￥{{item.sell_price}}</text>
 				<text>￥{{item.market_price}}</text>
 			</view>
-			<view class="name">
+			<view class="name" style="margin: 0 auto;font-size: 40rpx;">
 				{{item.title}}
 			</view>
 		</view>

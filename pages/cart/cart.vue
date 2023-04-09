@@ -1,10 +1,12 @@
 <template>
 	<view :style="'height:'+(screenHeight+200)+'px;background-color:#eee;'">
-		<view class="cart" >
+		<view class="cart">
 			<view v-for="(item,index) in test"
 				style="height: 200rpx;width: 100%;display: flex;align-items: center;border-bottom: 7px solid #eee;border-top: 7px solid #eee;background-color: white;">
+
 				<u-checkbox activeColor="blue" shape="circle" checked="item.checked" customStyle="margin-left:5%;">
 				</u-checkbox>
+
 				<view style="height: 70%;width: 20%;margin-left:5%;">
 					<img src="../../static/list.png" style="" alt="">
 				</view>
@@ -49,7 +51,8 @@
 	export default {
 		data() {
 			return {
-				screenHeight:0,
+				empty: null,
+				screenHeight: 0,
 				sum: 10000,
 				all: false,
 				test: [{
@@ -61,7 +64,7 @@
 						checked: true,
 						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
 						num: 10
-					},{
+					}, {
 						checked: true,
 						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
 						num: 10
@@ -130,6 +133,6 @@
 		height: 100rpx;
 		display: flex;
 		align-items: center;
-  z-index: 999;
+		z-index: 999;
 	}
 </style>

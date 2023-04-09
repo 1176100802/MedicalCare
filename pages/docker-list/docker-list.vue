@@ -1,40 +1,40 @@
 <template>
 	<view>
-		
-		 <!-- #ifdef H5 -->
-		    <view class="topBar" style="top: 70rpx;">
-		    	<image @click="open" class="tImage" src="/static/list.png" mode="scaleToFill"></image>
-		    	<text class="title">{{title}}</text>
-		    </view>
-		 <!-- #endif -->
-		 
-		 <!-- #ifdef MP-WEIXIN -->
-		    <view class="topBar" style="top: 0rpx;">
-		    	<image @click="open" class="tImage" src="/static/list.png" mode="scaleToFill"></image>
-		    	<text class="title">{{title}}</text>
-		    </view>
-		 <!-- #endif -->
-		
+
+		<!-- #ifdef H5 -->
+		<view class="topBar" style="top: 70rpx;">
+			<image @click="open" class="tImage" src="/static/list.png" mode="scaleToFill"></image>
+			<text class="title">{{title}}</text>
+		</view>
+		<!-- #endif -->
+
+		<!-- #ifdef MP-WEIXIN -->
+		<view class="topBar" style="top: 0rpx;">
+			<image @click="open" class="tImage" src="/static/list.png" mode="scaleToFill"></image>
+			<text class="title">{{title}}</text>
+		</view>
+		<!-- #endif -->
 
 
 
-		<view @touchstart="touchStart" @touchend="touchEnd" >
+
+		<view @touchstart="touchStart" @touchend="touchEnd">
 			<!-- 遮罩层 -->
 			<view class="drawer-mask" :class="{ 'drawer-mask-visible': stateDrawer }" @tap="close()" />
 			<!-- 内容列表 -->
 			<view class="drawer-content" :class="{ 'drawer-content-visible': stateDrawer}">
 				<scroll-view style="height: 100%;" scroll-y="true">
-					<view>科室选择</view>
-					<view v-for="item in 30" :key="item" @click="change(item)">
-						<view v-if="item == testindex"><text style="color: red;">可滚动内容 {{ item }}</text></view>
-						<view v-else><text style="color: black;">可滚动内容 {{ item }}</text></view>
+					<view style="font-size: 30px;">类型选择</view>
+					<view v-for="(item,index) in dockerList" :key="index" @click="getDockers(index)">
+						<view v-if="index == currentIndex"><text style="color: red;">{{item.name}}</text></view>
+						<view v-else><text style="color: black;">{{ item.name }}</text></view>
 					</view>
 				</scroll-view>
 			</view>
 		</view>
 
 
-		<view class="info" :style="'height:'+screenHeight+'px'" @touchstart="touchStart" @touchend="touchEnd" >
+		<view class="info" :style="'height:'+screenHeight+'px'" @touchstart="touchStart" @touchend="touchEnd">
 			<u-list>
 				<u-list-item v-for="(item, index) in indexList" :key="index">
 					<u-cell :title="item" @click="nav(index)">
@@ -42,6 +42,7 @@
 				</u-list-item>
 			</u-list>
 		</view>
+		<u-loading-page loading-color="#000000" :loading="loaded"></u-loading-page>
 	</view>
 
 </template>
@@ -55,7 +56,7 @@
 	export default {
 		data() {
 			return {
-				title: "外科",
+				title: "",
 				stateDrawer: false,
 				startTime: null, // 手势滑动时间
 				startPosition: 0, // 手势进入时
@@ -64,7 +65,15 @@
 				indexList: [
 					"docker1", "docker2", "docker3"
 				],
-				testindex:0
+				dockerList: [{
+					'id': 1,
+					'name': '外科'
+				}, {
+					'id': 2,
+					'name': '内科'
+				}],
+				currentIndex: 0,
+				loaded: null
 			}
 		},
 		created() {},
@@ -98,24 +107,52 @@
 					this.close()
 				}
 			},
-			change(index) {
-				this.testindex=index
-				if(index==2){
-					this.indexList=["docker4", "docker5", "docker6"]
-				}
-				console.log("test"+this.testindex)
-				this.close()
-			},
-			nav(index){
+
+			nav(index) {
 				console.log(index)
 				uni.navigateTo({
-					url: '/pages/docker-detail/docker-detail?id='+index
+					url: '/pages/docker-detail/docker-detail?id=' + index
 				});
+			},
+			async getDockerList() {
+				this.loaded = true;
+				try{
+					const res = await this.$myRequest({
+						url: '/getDockerList',
+						method: 'GET'
+					})
+				}catch(error){
+					this.loaded = false;
+				}
+				this.dockerList = res.data.data;
+				this.getDockers(0)
+			},
+			async getDockers(index) {
+				this.loaded = true;
+				this.title = this.dockerList[index].name;
+				this.currentIndex = index;
+				this.close();
+				var id = this.dockerList[index].id;
+				try{
+					const res = await this.$myRequest({
+						url: '/getDockers',
+						method: 'GET',
+						data: {
+							id: id
+						}
+					})
+				}catch(error){
+					this.loaded = false;
+				}
+				this.indexList = res.data.data;
+				this.loaded = false;
 			}
 
 		},
 		onLoad() {
 			this.screenHeight = this.$store.state.globalHeight
+
+			this.getDockerList()
 		}
 	}
 </script>
@@ -129,10 +166,10 @@
 
 	.topBar {
 		/* border-radius: 20rpx; */
-		background-color: rgba(214,239,210,.7);
+		background-color: rgba(214, 239, 210, .7);
 		display: flex;
 		position: fixed;
-		
+
 		/* left: 2%; */
 		z-index: 999;
 		width: 100%;
@@ -140,14 +177,15 @@
 		justify-content: center;
 		align-items: center;
 	}
+
 	.drawer-content view {
 		font-size: 20px;
 		line-height: 1.5;
 		margin-top: 70rpx;
 		margin-bottom: 10px;
 	}
-	
-	
+
+
 
 	.title {
 		margin: 0 auto;
@@ -156,7 +194,7 @@
 	}
 
 
-	
+
 
 
 
@@ -199,9 +237,9 @@
 		opacity: 1;
 	}
 
-	
+
 	.info {
-		
+
 		margin-top: 100rpx;
 	}
 </style>

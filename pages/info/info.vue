@@ -3,7 +3,7 @@
 		<view
 			:style="'height:'+screenHeight+'px;background-color: rgb(222,225,230);width:100%;position: absolute;top:0;left:0;z-index:-1;'">
 		</view>
-		<u-loading-page :loading="load"></u-loading-page>
+		
 		<tabs :tabBars="tabBars" :tabIndex="tabIndex" @tabtap="tabtap"></tabs>
 		<view class="content" v-if=" contData.length !=0">
 			<view class="item" style="margin-top: 30rpx;" v-for=" item,index in contData" :key="index">
@@ -21,6 +21,7 @@
 			<u-empty mode="message" icon="http://cdn.uviewui.com/uview/empty/message.png">
 			</u-empty>
 		</view>
+		<u-loading-page :loading="load"></u-loading-page>
 	</view>
 </template>
 
@@ -51,13 +52,12 @@
 		methods: {
 			tabtap(index) {
 				this.load = true
-
-				console.log(index)
+				
 				this.tabIndex = index;
 				this.getInfo()
 			},
 			getInfo() {
-
+				
 				//发送请求 获取数据
 
 				if (this.tabIndex == 1) {

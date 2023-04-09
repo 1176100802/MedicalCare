@@ -5,7 +5,7 @@
 		</view>
 		<view class="box">
 			<view class="aImg">
-				<img src="https://www.runoob.com/images/tryitimg.gif" alt="">
+				<img src="/static/nurse.png" alt="">
 			</view>
 			<text style="margin-left: 50rpx;">医护人员</text>
 		</view>
@@ -15,12 +15,13 @@
 		<view class="info" :style="'height:'+screenHeight+'px'">
 			<view v-if="index === 0" style="width: 100%;">
 				<u-collapse @change="change" @close="close" @open="open">
-					<u-collapse-item title="医护机构" name="Address">
+					<u-collapse-item title="医护预约" name="Address">
 						<view v-for="(item,index) in info" :key="index" style="margin-bottom: 30rpx;">
 							<text class="date" style="color: green;width: 100%;display: block">{{item.date}}</text>
 							<text class="price"
 								style="color: red;width: 50%;display: block;margin-top: 30rpx;margin-bottom: 30rpx;">价格:{{item.price}}</text>
-							<u-button text="申请" style="width: 80%;margin-bottom: 30rpx;" type="primary" @click="sendRequest(index)"></u-button>
+							<u-button text="申请" style="width: 80%;margin-bottom: 30rpx;" type="primary"
+								@click="sendRequest(index)"></u-button>
 							<u-line color="#2979ff" style="margin-top: 10rpx;"></u-line>
 						</view>
 					</u-collapse-item>
@@ -29,10 +30,10 @@
 			<view v-else>
 				<u-collapse @change="change" @close="close" @open="open">
 					<u-collapse-item title="医护介绍" name="Introduce">
-						 <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+						<text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
 					</u-collapse-item>
 					<u-collapse-item title="医护擅长" name="Habite">
-						 <text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+						<text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
 					</u-collapse-item>
 				</u-collapse>
 			</view>
@@ -78,8 +79,8 @@
 			change(e) {
 				// console.log('change', e)
 			},
-			sendRequest(index){
-				console.log(index)
+			sendRequest(index) {
+				
 			}
 
 		},

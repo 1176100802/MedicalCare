@@ -5,8 +5,23 @@ export const myRequest = (options) => {
 			url: BASE_URL + options.url,
 			method: options.method || 'GET',
 			data: options.data || {},
-			header:{'content-type':'application/x-www-form-urlencoded'},
+			header:{'content-type':'application/json'},
 			success: (res) => {
+				// 设置未登录拦截，如果后端code返回401则跳转到login页面
+				// console.log(res)
+				// if(res.data.code==401){
+				// 	uni.switchTab({
+				// 		url: '/pages/login/login',
+				// 		complete(res) {
+				// 			uni.showToast({
+				// 				title: '未登录',
+				// 				icon:"error"
+				// 			})
+				// 		}
+				// 	});
+				// }else{
+				// 	resolve(res)
+				// }
 				resolve(res)
 			},
 			fail: (err) => {

@@ -1,10 +1,9 @@
 <template>
 	<view>
 		<view class="top">
-			<img src="https://img1.baidu.com/it/u=1680296034,3230243816&fm=253&fmt=auto&app=120&f=PNG?w=640&h=361"
-				:style="'filter:opacity('+opacity+'%);height:100%;width:100%;'" alt="">
+			<img src="/static/top.png" :style="'filter:opacity('+opacity+'%);height:100%;width:100%;'" alt="">
 		</view>
-<!-- <view class="searchBar" :style="'top:'+Math.min(top,20)+'rpx;background-color:rgba(255,255,255,'+color+');'"> -->
+		<!-- <view class="searchBar" :style="'top:'+Math.min(top,20)+'rpx;background-color:rgba(255,255,255,'+color+');'"> -->
 		<view class="searchBar" :style="'top:'+Math.min(top,20)+'rpx'">
 			<view class="searchInput" :style="'width:'+width+'%'">
 				<u-search bgColor="#ffffff" inputAlign="center" height="45px" shape="round" :showAction="false"
@@ -53,23 +52,17 @@
 				goods: [],
 				pageindex: 1,
 				list4: [{
-					name: '关注'
+					name: '中西药品'
 				}, {
-					name: '推荐',
+					name: '感冒用药',
 				}, {
-					name: '电影',
+					name: '止痛消炎',
 				}, {
-					name: '科技'
+					name: '止咳平喘'
 				}, {
-					name: '音乐'
+					name: '维矿补充'
 				}, {
-					name: '美食'
-				}, {
-					name: '文化'
-				}, {
-					name: '财经'
-				}, {
-					name: '手工'
+					name: '腹泻通便'
 				}],
 			}
 		},
@@ -86,8 +79,31 @@
 				// })
 				// this.goods = [...this.goods, ...res.data.message]
 				// callback && callback()
-				this.goods=[{"img_url":"https://img2.baidu.com/it/u=3401214597,176861082&fm=253&fmt=auto&app=138&f=PNG?w=414&h=736","title":"萨达萨达是萨达萨达是萨达萨达是萨达萨达是萨达萨达是萨达萨达是","sell_price":"10000","market_price":"20000","id":"1"},{"img_url":"../../static/list.png","title":"2","sell_price":"10000","market_price":"20000","id":"2"},{"img_url":"../../static/list.png","title":"4","sell_price":"10000","market_price":"20000","id":"3"},{"img_url":"../../static/list.png","title":"3","sell_price":"10000","market_price":"20000"}]
-				
+				this.goods = [{
+					"img_url": "/static/medicine.png",
+					"title": "medicine1",
+					"sell_price": "10000",
+					"market_price": "20000",
+					"id": "1"
+				}, {
+					"img_url": "/static/medicine.png",
+					"title": "medicine1",
+					"sell_price": "10000",
+					"market_price": "20000",
+					"id": "2"
+				}, {
+					"img_url": "/static/medicine.png",
+					"title": "medicine1",
+					"sell_price": "10000",
+					"market_price": "20000",
+					"id": "3"
+				}, {
+					"img_url": "/static/medicine.png",
+					"title": "medicine1",
+					"sell_price": "10000",
+					"market_price": "20000"
+				}]
+
 			},
 			goGoodsDetail(id) {
 				uni.navigateTo({
@@ -123,10 +139,11 @@
 			console.log("H5")
 			// #endif
 			this.getGoodsList()
+
 		},
 		onReachBottom() {
-			
-			if (this.goods.length<this.pageindex*10) return this.flag=true 
+
+			if (this.goods.length < this.pageindex * 10) return this.flag = true
 			this.pageindex++
 			this.getGoodsList()
 		},
@@ -171,7 +188,7 @@
 	}
 
 	.info {
-		margin-top: 100rpx;
+		margin-top: 20rpx;
 	}
 
 	.u-page {
