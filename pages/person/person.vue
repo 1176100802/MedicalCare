@@ -5,15 +5,16 @@
 
 		</view>
 		<view class="info">
-			<u-avatar text="北" fontSize="30" randomBgColor size="70" customStyle="z-index:999"></u-avatar>
+			<u-avatar :text="userInfo.username" fontSize="30" randomBgColor size="70" customStyle="z-index:999">
+			</u-avatar>
 
 		</view>
 		<view class="center" :style="'height:'+screenHeight+'px;background-color: rgb(222,225,230);'">
 			<view class="myInfo"
 				style="background-color: white;border-radius: 20rpx;box-shadow: 0px 1px 2px #000;width: 96%;margin-left: 2%;">
 				<text style="margin-left: 35px;line-height: 50px;font-family: kaiti;font-size: 20px;">我的信息</text>
-				<u-grid :border="false" col="4" @click="click">
-					<u-grid-item v-for="(listItem,listIndex) in list" :key="listIndex">
+				<u-grid :border="false" col="4" @click="click1">
+					<u-grid-item v-for="(listItem,listIndex) in list1" :key="listIndex">
 						<u-icon :customStyle="{paddingTop:20+'rpx'}" :name="listItem.name" :size="22"></u-icon>
 						<text class="grid-text">{{listItem.title}}</text>
 					</u-grid-item>
@@ -23,8 +24,8 @@
 			<view class="careInfo"
 				style="background-color: white;border-radius: 20rpx;box-shadow: 0px 1px 2px #000;width: 96%;margin-left: 2%;margin-top: 30rpx;">
 				<text style="margin-left: 35px;line-height: 50px;font-family: kaiti;font-size: 20px;">挂号信息</text>
-				<u-grid :border="false" col="4">
-					<u-grid-item v-for="(listItem,listIndex) in list" :key="listIndex">
+				<u-grid :border="false" col="4" @click="click2">
+					<u-grid-item v-for="(listItem,listIndex) in list2" :key="listIndex">
 						<u-icon :customStyle="{paddingTop:20+'rpx'}" :name="listItem.name" :size="22"></u-icon>
 						<text class="grid-text">{{listItem.title}}</text>
 					</u-grid-item>
@@ -40,38 +41,30 @@
 		data() {
 			return {
 				screenHeight: 0,
-				userInfo:null,
-				list: [{
-						name: 'photo',
-						title: '图片'
+				userInfo: null,
+				list1: [{
+						name: 'man-add',
+						title: '修改信息'
 					},
 					{
-						name: 'lock',
-						title: '锁头'
+						'name': 'order',
+						'title': '信息'
+					}
+				],
+				list2: [{
+						'name': 'shopping-cart',
+						'title': '购物车'
 					},
 					{
-						name: 'star',
-						title: '星星'
-					},
-					{
-						name: 'hourglass',
-						title: '沙漏'
-					},
-					{
-						name: 'home',
-						title: '首页'
-					},
-					{
-						name: 'star',
-						title: '音量'
-					},
+						'name': 'list',
+						'title': '订单'
+					}
 				]
 
 			}
 		},
 		methods: {
-			click(name) {
-				this.$refs.uToast.success(`点击了第${name}个`)
+			click1(name) {
 				if (name == 0) {
 					uni.navigateTo({
 						url: "/pages/unpateinfo/unpateinfo"
@@ -80,23 +73,14 @@
 					uni.navigateTo({
 						url: "/pages/info/info"
 					})
-				} else if (name == 2) {
-					uni.makePhoneCall({
-						phoneNumber: "123", //电话号码
-						success: function(e) {
-							console.log(e);
-						},
-						fail: function(e) {
-							console.log(e);
-
-						}
-					})
-				} else if (name == 3) {
+				}
+			},
+			click2(name) {
+				if (name == 0) {
 					uni.navigateTo({
 						url: "/pages/cart/cart"
 					})
-				}
-				else if (name == 4) {
+				} else if (name == 1) {
 					uni.navigateTo({
 						url: "/pages/order/order"
 					})
@@ -104,9 +88,9 @@
 			}
 		},
 		onLoad() {
-			this.userInfo=this.$store.state.userInfo
+			this.userInfo = this.$store.state.userInfo
 			this.screenHeight = this.$store.state.globalHeight
-		},
+		}
 	}
 </script>
 

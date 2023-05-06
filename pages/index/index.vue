@@ -45,40 +45,20 @@
 					'/static/pic2.jpeg'
 				],
 				swiperList: [{
-						'icon': 'integral',
-						'title': '医护查询'
-					},
-					{
-						'icon': 'kefu-ermai',
-						'title': '医护查询'
-					},
-					{
-						'icon': 'coupon',
-						'title': '医护查询'
-					},
-					{
-						'icon': 'gift',
-						'title': '医护查询'
-					},
-					{
-						'icon': 'scan',
-						'title': '医护查询'
-					},
-					{
-						'icon': 'pause-circle',
-						'title': '医护查询'
-					},
-					{
-						'icon': 'wifi',
-						'title': '医护查询'
-					},
-					{
-						'icon': 'email',
-						'title': '医护查询'
+						'icon': 'shopping-cart',
+						'title': '购物车'
 					},
 					{
 						'icon': 'list',
-						'title': '医护查询'
+						'title': '订单'
+					},
+					{
+						'icon': 'order',
+						'title': '信息'
+					},
+					{
+						'icon': 'phone',
+						'title': '急救电话'
 					}
 				],
 				text5: '欢迎进入智慧医疗系统!!!'
@@ -94,12 +74,31 @@
 				// this.swipers=res.data
 			},
 			click(name) {
-				if(name==0){
-					console.log("1")
+				if (name == 0) {
 					uni.navigateTo({
-						url:'/pages/cart/cart'
+						url: '/pages/cart/cart'
+					})
+				} else if (name == 1) {
+					uni.navigateTo({
+						url: "/pages/order/order"
+					})
+				} else if (name == 2) {
+					uni.navigateTo({
+						url: "/pages/info/info"
+					})
+				} else if (name == 3) {
+					uni.makePhoneCall({
+						phoneNumber: "1101", //电话号码
+						success: function(e) {
+							console.log(e);
+						},
+						fail: function(e) {
+							console.log(e);
+						}
 					})
 				}
+
+
 			}
 		},
 		onLoad() {

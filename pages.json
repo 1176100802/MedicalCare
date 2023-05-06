@@ -27,7 +27,7 @@
 		}, {
 			"path": "pages/info/info",
 			"style": {
-				"navigationBarTitleText": "消息",
+				"navigationBarTitleText": "医护",
 				"enablePullDownRefresh": false
 			}
 
@@ -115,15 +115,15 @@
 				"text": "首页"
 			},
 			{
-				"iconPath": "static/icon/news.png",
+				"iconPath": "static/icon/docker.png",
 				"pagePath": "pages/docker-list/docker-list",
-				"selectedIconPath": "static/icon/news-active.png",
-				"text": "消息"
+				"selectedIconPath": "static/icon/docker-active.png",
+				"text": "医生"
 			},
 			{
-				"iconPath": "static/icon/cart.png",
+				"iconPath": "static/icon/shop.png",
 				"pagePath": "pages/shop/shop",
-				"selectedIconPath": "static/icon/cart-active.png",
+				"selectedIconPath": "static/icon/shop-active.png",
 				"text": "药房"
 			},
 			{

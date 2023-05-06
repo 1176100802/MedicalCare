@@ -4,11 +4,11 @@
 			<view v-for="(item,index) in test"
 				style="height: 200rpx;width: 100%;display: flex;align-items: center;border-bottom: 7px solid #eee;border-top: 7px solid #eee;background-color: white;">
 
-				<u-checkbox activeColor="blue" shape="circle" checked="item.checked" customStyle="margin-left:5%;">
+				<u-checkbox activeColor="blue" shape="circle" :checked="item.checked" customStyle="margin-left:5%;">
 				</u-checkbox>
 
 				<view style="height: 70%;width: 20%;margin-left:5%;">
-					<img src="../../static/list.png" style="" alt="">
+					<img src="../../static/medicine.png" style="" alt="">
 				</view>
 				<view class="right" style="margin-left: 5%;width: 60%;height: 100%;">
 					<view
@@ -33,7 +33,7 @@
 		</view>
 		<view class="goods_nav">
 			<view style="margin-left: 10%;">
-				<u-checkbox activeColor="blue" shape="circle" :checked="all" label="全选">
+				<u-checkbox activeColor="blue" shape="circle" :checked="all" @change="allClick()" label="全选">
 				</u-checkbox>
 			</view>
 			<view style="margin-left: 10%;">
@@ -57,42 +57,27 @@
 				all: false,
 				test: [{
 						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
+						title: "药品1",
 						num: 10
 					},
 					{
 						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
-						num: 10
+						title: "药品2",
+						num: 5
 					}, {
-						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
+						checked: false,
+						title: "药品3",
 						num: 10
 					},
 					{
 						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
-						num: 10
+						title: "药品4",
+						num: 11
 					},
 					{
-						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
-						num: 10
-					},
-					{
-						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
-						num: 10
-					},
-					{
-						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
-						num: 10
-					},
-					{
-						checked: true,
-						title: "上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从上传首次尝试从",
-						num: 10
+						checked: false,
+						title: "药品5",
+						num: 6
 					}
 				]
 			}
@@ -103,6 +88,14 @@
 			},
 			click() {
 				console.log('click');
+			},
+			allClick(){
+				this.all=!this.all
+				console.log(this.all)
+				for(let i=0;i<this.test.length;i++){
+					this.test[i].checked=this.all
+				}
+				
 			}
 		},
 		onLoad() {

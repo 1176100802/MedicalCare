@@ -31,9 +31,9 @@
 			<view style="height: 100rpx;margin: 0 auto;padding-top: 50rpx;">
 				<u-number-box v-model="value" @change="valChange" ></u-number-box>
 			</view>
-			<view style="width: 50%;margin: 0 auto;margin-bottom: 10rpx;">
+		<!-- 	<view style="width: 50%;margin: 0 auto;margin-bottom: 10rpx;">
 				<u-button text="购买" type="primary" shape="circle" @click="send"></u-button>
-			</view>
+			</view> -->
 		</u-popup>
 	</view>
 </template>
@@ -47,23 +47,12 @@
 				currentNum: 0,
 				value: 0,
 				list6: [
-					'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-					'https://cdn.uviewui.com/uview/swiper/swiper1.png',
+					'/static/pic1.jpg',
 				],
-				options: [{
-					icon: 'cart',
-					text: '购物车',
-					info: 2
-				}],
+				options: [],
 				buttonGroup: [{
 						text: '加入购物车',
 						backgroundColor: '#ff0000',
-						color: '#fff'
-					},
-					{
-						text: '立即购买',
-						backgroundColor: '#ffa200',
 						color: '#fff'
 					}
 				]

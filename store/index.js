@@ -16,7 +16,7 @@ const store = new Vuex.Store({
 		},
 		LOGOUT(state) {
 			uni.clearStorageSync()
-			state.userName = {}
+			state.userInfo = {}
 		}
 
 	},

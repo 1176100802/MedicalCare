@@ -13,7 +13,7 @@
 		</view>
 		<view class="info" :style="'height:'+screenHeight+'px;'">
 			<view class="u-demo-block__content">
-				<u-tabs :list="list4" lineWidth="20" lineHeight="7" :lineColor="`url(${lineBg}) 100% 100%`"
+				<u-tabs :list="list4" lineWidth="20" lineHeight="7" :lineColor="`url(${lineBg}) 100% 100%`" 
 					:activeStyle="{
 						color: '#303133',
 						fontWeight: 'bold',
@@ -21,7 +21,7 @@
 					}" :inactiveStyle="{
 						color: '#606266',
 						transform: 'scale(1)'
-					}" itemStyle="padding-left: 15px; padding-right: 15px; height: 34px;" @click="click">
+					}" itemStyle="padding-left: 15px; padding-right: 15px; height: 34px;" @click="changeLink">
 				</u-tabs>
 			</view>
 			<view class="goods">
@@ -70,8 +70,23 @@
 			"goods-list": goodsList
 		},
 		methods: {
-			click(item) {
-				console.log('item', item);
+		
+			async getLinkBar() {
+				const res = await this.$myRequest({
+					url: '8001/getLinkBar',
+					method: 'GET'
+				})
+				
+				this.list4 = res.data.data;
+				this.changeLink(0)
+			},
+			async changeLink(index){
+				console.log(index)
+				const res = await this.$myRequest({
+					url: '8001/changeLink',
+					method: 'GET'
+				})
+				this.goods=res.data.data
 			},
 			async getGoodsList(callback) {
 				// const res = await this.$myRequest({
@@ -85,23 +100,37 @@
 					"sell_price": "10000",
 					"market_price": "20000",
 					"id": "1"
-				}, {
+				},
+				{
 					"img_url": "/static/medicine.png",
 					"title": "medicine1",
 					"sell_price": "10000",
 					"market_price": "20000",
-					"id": "2"
-				}, {
+					"id": "1"
+				},{
 					"img_url": "/static/medicine.png",
 					"title": "medicine1",
 					"sell_price": "10000",
 					"market_price": "20000",
-					"id": "3"
-				}, {
+					"id": "1"
+				},{
 					"img_url": "/static/medicine.png",
 					"title": "medicine1",
 					"sell_price": "10000",
-					"market_price": "20000"
+					"market_price": "20000",
+					"id": "1"
+				},{
+					"img_url": "/static/medicine.png",
+					"title": "medicine1",
+					"sell_price": "10000",
+					"market_price": "20000",
+					"id": "1"
+				},{
+					"img_url": "/static/medicine.png",
+					"title": "medicine1",
+					"sell_price": "10000",
+					"market_price": "20000",
+					"id": "1"
 				}]
 
 			},

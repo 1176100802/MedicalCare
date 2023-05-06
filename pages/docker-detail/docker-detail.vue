@@ -5,9 +5,9 @@
 		</view>
 		<view class="box">
 			<view class="aImg">
-				<img src="/static/nurse.png" alt="">
+				<img :src="dockerInfo.doctorphoto" >
 			</view>
-			<text style="margin-left: 50rpx;">医护人员</text>
+			<text style="margin-left: 50rpx;">{{dockerInfo.doctorname}}</text>
 		</view>
 		<view class="tab">
 			<u-tabs :list="list1" @click="click" lineWidth="50"></u-tabs>
@@ -30,10 +30,10 @@
 			<view v-else>
 				<u-collapse @change="change" @close="close" @open="open">
 					<u-collapse-item title="医护介绍" name="Introduce">
-						<text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+						<text class="u-collapse-content">{{dockerInfo.doctorinfo}}</text>
 					</u-collapse-item>
 					<u-collapse-item title="医护擅长" name="Habite">
-						<text class="u-collapse-content">涵盖uniapp各个方面，给开发者方向指导和设计理念，让您茅塞顿开，一马平川</text>
+						<text class="u-collapse-content">{{dockerInfo.doctorable}}</text>
 					</u-collapse-item>
 				</u-collapse>
 			</view>
@@ -45,7 +45,7 @@
 	export default {
 		data() {
 			return {
-				id: 0,
+				doctorid: 0,
 				list1: [{
 					name: '当日挂号',
 				}, {
@@ -61,7 +61,8 @@
 						date: "2021-11-21",
 						price: "130"
 					}
-				]
+				],
+				dockerInfo:{}
 
 			}
 		},
@@ -80,13 +81,23 @@
 				// console.log('change', e)
 			},
 			sendRequest(index) {
+
+			},
+			async getInfo() {
+				const res = await this.$myRequest({
+					url: '8001/doctor/find/'+this.doctorid,
+					method: 'POST'
+				})
 				
+				this.dockerInfo = res.data.data;
+
 			}
 
 		},
 		onLoad(option) {
-			this.id = option.id
+			this.doctorid = option.doctorid
 			this.screenHeight = this.$store.state.globalHeight
+			this.getInfo()
 		}
 	}
 </script>

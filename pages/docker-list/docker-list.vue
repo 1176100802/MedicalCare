@@ -37,7 +37,7 @@
 		<view class="info" :style="'height:'+screenHeight+'px'" @touchstart="touchStart" @touchend="touchEnd">
 			<u-list>
 				<u-list-item v-for="(item, index) in indexList" :key="index">
-					<u-cell :title="item" @click="nav(index)">
+					<u-cell :title="item.doctorname" @click="nav(item.doctorid)">
 					</u-cell>
 				</u-list-item>
 			</u-list>
@@ -62,16 +62,8 @@
 				startPosition: 0, // 手势进入时
 				endPosition: 0, // 手势离开时
 				screenHeight: 0,
-				indexList: [
-					"docker1", "docker2", "docker3"
-				],
-				dockerList: [{
-					'id': 1,
-					'name': '外科'
-				}, {
-					'id': 2,
-					'name': '内科'
-				}],
+				indexList: [],
+				dockerList: [],
 				currentIndex: 0,
 				loaded: null
 			}
@@ -109,43 +101,44 @@
 			},
 
 			nav(index) {
-				console.log(index)
 				uni.navigateTo({
-					url: '/pages/docker-detail/docker-detail?id=' + index
+					url: '/pages/docker-detail/docker-detail?doctorid=' + index
 				});
 			},
 			async getDockerList() {
 				this.loaded = true;
 				try{
 					const res = await this.$myRequest({
-						url: '/getDockerList',
-						method: 'GET'
+						url: '8001/department/all',
+						method: 'POST'
 					})
+					
+					this.dockerList = res.data.data;
+				
+					this.getDockers(0)	
+					
 				}catch(error){
 					this.loaded = false;
 				}
-				this.dockerList = res.data.data;
-				this.getDockers(0)
+			
 			},
 			async getDockers(index) {
 				this.loaded = true;
 				this.title = this.dockerList[index].name;
 				this.currentIndex = index;
 				this.close();
-				var id = this.dockerList[index].id;
+				var id = this.dockerList[index].departid;
 				try{
 					const res = await this.$myRequest({
-						url: '/getDockers',
-						method: 'GET',
-						data: {
-							id: id
-						}
+						url: '8001/doctor/by/'+id,
+						method: 'GET'
 					})
+					this.indexList = res.data.data;
+					this.loaded = false;
 				}catch(error){
 					this.loaded = false;
 				}
-				this.indexList = res.data.data;
-				this.loaded = false;
+				
 			}
 
 		},

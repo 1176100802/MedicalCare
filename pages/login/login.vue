@@ -30,7 +30,7 @@
 	export default {
 		data() {
 			return {
-				src: "https://www.uviewui.com/common/logo.png",
+				src: "/static/logo.png",
 				screenHeight: 0,
 				userInfos:null
 			}
@@ -66,7 +66,7 @@
 			},
 			async wxLogin(code,nickName) {
 				const res = await this.$myRequest({
-					url: '/getCode',
+					url: '8001/getCode',
 					method: 'GET',
 					data: {
 						code:code,
