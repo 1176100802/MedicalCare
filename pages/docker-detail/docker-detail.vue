@@ -5,7 +5,7 @@
 		</view>
 		<view class="box">
 			<view class="aImg">
-				<img :src="dockerInfo.doctorphoto" >
+				<img  :src="'http://'+dockerInfo.doctorphoto">
 			</view>
 			<text style="margin-left: 50rpx;">{{dockerInfo.doctorname}}</text>
 		</view>
@@ -90,6 +90,7 @@
 				})
 				
 				this.dockerInfo = res.data.data;
+				console.log(this.dockerInfo)
 
 			}
 

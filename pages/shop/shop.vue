@@ -7,7 +7,7 @@
 		<view class="searchBar" :style="'top:'+Math.min(top,20)+'rpx'">
 			<view class="searchInput" :style="'width:'+width+'%'">
 				<u-search bgColor="#ffffff" inputAlign="center" height="45px" shape="round" :showAction="false"
-					borderColor="rgb(255,255,0)">
+					borderColor="rgb(255,255,0)" v-model="searchName" @search="goSearch">
 				</u-search>
 			</view>
 		</view>
@@ -25,7 +25,7 @@
 				</u-tabs>
 			</view>
 			<view class="goods">
-				<goods-list @goodsItemClick="goGoodsDetail()" :goods="goods"></goods-list>
+				<goods-list @goodsItemClick="goodsItemClick" :goods="goods"></goods-list>
 			</view>
 		</view>
 
@@ -40,6 +40,7 @@
 	export default {
 		data() {
 			return {
+				searchName:'',
 				screenHeight: 0,
 				top: 0,
 				color: 0,
@@ -72,71 +73,44 @@
 		methods: {
 		
 			async getLinkBar() {
+				// const res = await this.$myRequest({
+				// 	url: '8001/getLinkBar',
+				// 	method: 'GET'
+				// })
+				
+				// this.list4 = res.data.data;
+				// this.changeLink(0)
+			},
+			async goSearch(){
 				const res = await this.$myRequest({
-					url: '8001/getLinkBar',
+					url: '8021/goods/search?name='+this.searchName==''?'!':this.searchName,
 					method: 'GET'
 				})
 				
-				this.list4 = res.data.data;
-				this.changeLink(0)
+				this.goods = res.data.data;
+				console.log("sea",this.goods)
 			},
 			async changeLink(index){
 				console.log(index)
-				const res = await this.$myRequest({
-					url: '8001/changeLink',
-					method: 'GET'
-				})
-				this.goods=res.data.data
+				// const res = await this.$myRequest({
+				// 	url: '8001/changeLink',
+				// 	method: 'GET'
+				// })
+				// this.goods=res.data.data
 			},
 			async getGoodsList(callback) {
-				// const res = await this.$myRequest({
-				// 	url: '/api/getgoods?pageindex=' + this.pageindex
-				// })
-				// this.goods = [...this.goods, ...res.data.message]
-				// callback && callback()
-				this.goods = [{
-					"img_url": "/static/medicine.png",
-					"title": "medicine1",
-					"sell_price": "10000",
-					"market_price": "20000",
-					"id": "1"
-				},
-				{
-					"img_url": "/static/medicine.png",
-					"title": "medicine1",
-					"sell_price": "10000",
-					"market_price": "20000",
-					"id": "1"
-				},{
-					"img_url": "/static/medicine.png",
-					"title": "medicine1",
-					"sell_price": "10000",
-					"market_price": "20000",
-					"id": "1"
-				},{
-					"img_url": "/static/medicine.png",
-					"title": "medicine1",
-					"sell_price": "10000",
-					"market_price": "20000",
-					"id": "1"
-				},{
-					"img_url": "/static/medicine.png",
-					"title": "medicine1",
-					"sell_price": "10000",
-					"market_price": "20000",
-					"id": "1"
-				},{
-					"img_url": "/static/medicine.png",
-					"title": "medicine1",
-					"sell_price": "10000",
-					"market_price": "20000",
-					"id": "1"
-				}]
+				const res = await this.$myRequest({
+					url: '8021/goods/all',
+					method: 'GET'
+				})
+				
+				this.goods = res.data.data;
+				
 
 			},
-			goGoodsDetail(id) {
+			goodsItemClick(e) {
 				uni.navigateTo({
-					url: '/pages/goods-detail/goods-detail?id=' + id
+					url: '/pages/goods-detail/goods-detail?id=' + e
 				})
 			}
 		},
@@ -167,8 +141,11 @@
 			this.high = 60
 			console.log("H5")
 			// #endif
-			this.getGoodsList()
+			
 
+		},
+		created() {
+			this.getGoodsList()
 		},
 		onReachBottom() {
 

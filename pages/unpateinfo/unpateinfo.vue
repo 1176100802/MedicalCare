@@ -42,7 +42,7 @@
 				birthday: Number(new Date()),
 				model1: {
 					userInfo: {
-						userID: 1,
+						userID: 0,
 						username: '',
 						sex: '',
 						birthday: '',
@@ -123,7 +123,6 @@
 				});
 			},
 			async modifyUserInfo() {
-				this.model1.userInfo["userID"]=1
 				
 				if(this.model1.userInfo.sex=='男'){
 					this.model1.userInfo.sex=1
@@ -165,6 +164,7 @@
 		onLoad() {
 			
 			this.model1.userInfo = this.$store.state.userInfo
+			console.log(this.model1.userInfo)
 			if(this.model1.userInfo.sex==1){
 				this.model1.userInfo.sex='男'
 			}

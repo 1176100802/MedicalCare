@@ -2,8 +2,8 @@
 	<view>
 		<view class="swiperImg">
 			<swiper indicator-dots current='0' @change="swiperChange">
-				<swiper-item v-for="(item,index) in list6" :key="index" @click="click">
-					<image :src="item"></image>
+				<swiper-item v-for="(item,index) in goodsInfo.gphoto" :key="index" @click="click">
+					<image :src="'http://'+item"></image>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -13,14 +13,20 @@
 				border-right: 15px solid transparent;">
 				</view>
 
-				<text style="color: black;line-height: 100rpx;margin-left: -60%;font-size: 40rpx;">￥500</text>
+				<text style="color: black;line-height: 100rpx;margin-left: -60%;font-size: 40rpx;">￥{{goodsInfo.gSalePrice}}</text>
 				<text
-					style="color: black;line-height: 100rpx;margin-left: 5%;font-size: 25rpx;text-decoration: line-through;">￥1000</text>
-				<text style="color: rgb(255,207,0);line-height: 100rpx;margin-left: 30%;font-size: 35rpx;">折扣优惠5折</text>
+					style="color: black;line-height: 100rpx;margin-left: 2%;font-size: 25rpx;text-decoration: line-through;">￥{{goodsInfo.gprice}}</text>
+				<text style="color: rgb(255,207,0);line-height: 100rpx;margin-left: 42%;font-size: 35rpx;">折扣优惠{{sale}}折</text>
 			</view>
 
 			<view class="name">
-				<text>名称：namename</text>
+				<text>商品名称：{{goodsInfo.gname}}</text>
+			</view>
+			<view class="gnum">
+				<text>商品库存：{{goodsInfo.gnumber}}</text>
+			</view>
+			<view class="inf">
+				<text>商品信息：{{goodsInfo.ginfo}}</text>
 			</view>
 			<view class="goods_nav">
 				<uni-goods-nav :fill="true" :options="options" :buttonGroup="buttonGroup" @click="onClick"
@@ -47,7 +53,7 @@
 				currentNum: 0,
 				value: 0,
 				list6: [
-					'/static/pic1.jpg',
+					'/static/pic1.jpg'
 				],
 				options: [],
 				buttonGroup: [{
@@ -55,7 +61,9 @@
 						backgroundColor: '#ff0000',
 						color: '#fff'
 					}
-				]
+				],
+				sale:0,
+				goodsInfo:{}
 			}
 		},
 		methods: {
@@ -103,13 +111,25 @@
 				uni.redirectTo({
 					url:"/pages/paypage/paypage"
 				})
+			},
+			async getGoodsInfo(){
+				const res = await this.$myRequest({
+					url: '8021/goods/find/'+this.id,
+					method: 'POST'
+				})
+				this.goodsInfo=res.data.data
+				this.goodsInfo.gphoto=[this.goodsInfo.gphoto]
+				this.sale=parseInt(goodsInfo.gSalePrice/goodsInfo.gprice*10)
+				console.log(this.goodsInfo)
 			}
 
 
 		},
 		onLoad(options) {
+			
 			this.id = options.id
-
+			this.getGoodsInfo()
+				
 		}
 	}
 </script>
@@ -139,6 +159,14 @@
 		}
 
 		.name {
+			margin-top: 50rpx;
+			margin-left: 5%;
+		}
+		.inf {
+			margin-top: 50rpx;
+			margin-left: 5%;
+		}
+		.gnum {
 			margin-top: 50rpx;
 			margin-left: 5%;
 		}

@@ -1,16 +1,15 @@
 <template>
 	<view class="goods_list">
-		<view class="goods_item" v-for="item in goods" :key="item.id" @click="navigator(item.id)">
+		<view class="goods_item" v-for="item in goods" :key="item.goodsid" @click="navigator(item.goodsid)">
 			<view style="margin-left: -10%;">
-				<image :src="item.img_url"></image>
+				<image :src="'http://'+item.gphoto" ></image>
 			</view>
-			
 			<view class="price">
-				<text>￥{{item.sell_price}}</text>
-				<text>￥{{item.market_price}}</text>
+				<text>￥{{item.gSalePrice}}</text>
+				<text>￥{{item.gprice}}</text>
 			</view>
 			<view class="name" style="margin: 0 auto;font-size: 40rpx;">
-				{{item.title}}
+				{{item.gname}}
 			</view>
 		</view>
 	</view>
